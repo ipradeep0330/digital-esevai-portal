@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const path = require('path'); // <- இது மிக முக்கியம்
 require('dotenv').config();
 
 const app = express();
@@ -90,6 +91,15 @@ app.post('/api/admin-login', (req, res) => {
     }
 });
 
+// ==========================================
+// Frontend Static Files & Fallback Route
+// ==========================================
+app.use(express.static(path.join(__dirname)));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
 app.listen(PORT, () => {
-    console.log(`Server running on port 5000`);
+    console.log(`Server running on port ${PORT}`);
 });
