@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>டிஜிட்டல் E-சேவை & டெக் ஆலோசனை மையம்</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-900 text-slate-100 font-sans min-h-screen flex flex-col">
+
+    <!-- Header Navigation -->
+    <header class="bg-slate-950 border-b border-slate-800 sticky top-0 z-50 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-between gap-4 overflow-x-auto">
+            
+            <!-- Logo & Title -->
+            <div class="flex items-center space-x-2 shrink-0">
+                <div class="bg-emerald-600 p-2 rounded-lg text-white font-bold text-base shadow">🏛️</div>
+                <div>
+                    <h1 class="text-sm font-bold text-emerald-400">டிஜிட்டல் E-சேவை மையம்</h1>
+                    <p class="text-[10px] text-slate-400">E-Sevai & Tech Portal</p>
+                </div>
+            </div>
+
+            <!-- Navigation Tabs -->
+            <nav class="flex items-center gap-1.5 shrink-0" id="navTabs">
+                <button id="btn-home" onclick="switchTab('home')" class="px-2.5 py-1.5 rounded-lg text-xs font-medium bg-emerald-600 text-white transition shadow">முகப்பு</button>
+                <button id="btn-paid" onclick="switchTab('paid')" class="px-2.5 py-1.5 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition">கட்டண சேவைகள்</button>
+                <button id="btn-free" onclick="switchTab('free')" class="px-2.5 py-1.5 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition">இலவச சேவைகள்</button>
+                <button id="btn-schemes" onclick="switchTab('schemes')" class="px-2.5 py-1.5 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition">துறை திட்டங்கள்</button>
+                <button id="btn-tech" onclick="switchTab('tech')" class="px-2.5 py-1.5 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition">டெக் தீர்வுகள்</button>
+                <button id="btn-track" onclick="switchTab('track')" class="px-2.5 py-1.5 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition">நிலை அறிய</button>
+                
+                <!-- Admin Button -->
+                <button id="btn-admin" onclick="switchTab('admin')" class="px-2.5 py-1.5 rounded-lg text-xs font-medium bg-amber-950/80 text-amber-300 border border-amber-500/60 hover:bg-amber-900 transition shadow flex items-center gap-1">🔒 அட்மின்</button>
+            </nav>
+
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow max-w-7xl mx-auto w-full p-6 md:p-8 space-y-6">
+
+        <!-- 1. HOME TAB -->
+        <div id="tab-home" class="space-y-6">
+            <div class="bg-gradient-to-r from-emerald-950/60 to-slate-800 p-8 md:p-10 rounded-2xl border border-emerald-500/30 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
+                <div class="space-y-4">
+                    <span class="bg-emerald-500/20 text-emerald-300 text-xs px-3 py-1.5 rounded-full font-semibold">நம்பகமான டிஜிட்டல் சேவை மையம்</span>
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-white leading-tight">அனைத்து அரசு சான்றிதழ்கள் & டெக் சேவைகள் ஒரே இடத்தில்!</h2>
+                    <p class="text-slate-300 max-w-2xl text-sm md:text-base leading-relaxed">வருவாய்த் துறைச் சான்றிதழ்கள் (REV-101 முதல் REV-120 வரை), இலவச சேவைகள் மற்றும் துறை வாரியான அரசு திட்ட வழிகாட்டுதல்கள்.</p>
+                    <div class="flex flex-wrap gap-4 pt-2">
+                        <button onclick="switchTab('paid')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-6 py-3 rounded-xl font-semibold shadow-lg transition">கட்டண சேவைகளுக்குச் செல்ல</button>
+                        <button onclick="switchTab('free')" class="bg-cyan-600 hover:bg-cyan-500 text-white px-6 py-3 rounded-xl font-semibold shadow-lg transition">இலவச சேவைகளைப் பார்க்க</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. PAID SERVICES TAB -->
+        <div id="tab-paid" class="hidden space-y-6">
+            <div class="bg-slate-800 p-6 md:p-8 rounded-2xl border border-slate-700 shadow-xl">
+                <h3 class="text-2xl font-bold text-emerald-400 mb-2">💳 கட்டணச் சேவைகள் (Paid Services)</h3>
+                <p class="text-slate-300 text-sm mb-6">ஒவ்வொரு சேவைப் பெட்டியிலும் உள்ள 'விண்ணப்பிக்க' பொத்தானை அழுத்தி பதிவு செய்யுங்கள்.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="paidServicesGrid"></div>
+            </div>
+        </div>
+
+        <!-- 3. FREE SERVICES TAB -->
+        <div id="tab-free" class="hidden space-y-6">
+            <div class="bg-slate-800 p-6 md:p-8 rounded-2xl border border-slate-700 shadow-xl">
+                <h3 class="text-2xl font-bold text-cyan-400 mb-2">🎁 இலவச சேவைகள் & பதிவிறக்கங்கள் (Free Services)</h3>
+                <p class="text-slate-300 text-sm mb-6">பொதுமக்கள் கட்டணமின்றி நேரடியாக விண்ணப்பித்துப் பெற்றுக்கொள்ளும் இலவச சேவைகள்.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="freeServicesGrid"></div>
+            </div>
+        </div>
+
+        <!-- 4. SCHEMES & LAND GUIDANCE TAB -->
+        <div id="tab-schemes" class="hidden space-y-6">
+            <div class="bg-slate-800 p-6 md:p-8 rounded-2xl border border-slate-700 space-y-6 shadow-xl">
+                <div>
+                    <h3 class="text-2xl font-bold text-emerald-400 mb-2">📜 துறை வாரியான அரசு திட்டங்கள் & வழிகாட்டுதல்</h3>
+                    <p class="text-slate-300 text-sm">கீழே உள்ள துறைகளில் ஒன்றைத் தேர்ந்தெடுக்கவும்.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="departmentGrid"></div>
+
+                <!-- Land Consultation Booking Form -->
+                <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 max-w-xl mt-6 shadow-md">
+                    <h4 class="text-md font-semibold text-white mb-4">திட்ட வழிகாட்டுதல் / ஆலோசனைக்கு பதிவு செய்ய:</h4>
+                    <form id="landForm" class="space-y-4">
+                        <div>
+                            <label class="block text-xs text-slate-400 mb-1">உங்கள் பெயர் *</label>
+                            <input type="text" id="landName" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-white text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-slate-400 mb-1">கைபேசி எண் *</label>
+                            <input type="tel" id="landPhone" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-white text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-slate-400 mb-1">விவரம் / தேவை *</label>
+                            <textarea id="landDetails" rows="2" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-white text-sm"></textarea>
+                        </div>
+                        <button type="submit" class="bg-emerald-600 hover:bg-emerald-500 text-white px-6 py-2.5 rounded-xl text-sm font-semibold transition">ஆலோசனைக்கு விண்ணப்பிக்க</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. TECH SOLUTIONS TAB -->
+        <div id="tab-tech" class="hidden space-y-6">
+            <div class="bg-slate-800 p-6 md:p-8 rounded-2xl border border-slate-700 space-y-6 shadow-xl">
+                <div>
+                    <h3 class="text-2xl font-bold text-emerald-400 mb-2">💡 தொழில்நுட்ப & பிசினஸ் தீர்வுகள்</h3>
+                    <p class="text-slate-300 text-sm">Excel ரிப்போர்ட்டுகள் மற்றும் ஆட்டோமேஷன் சேவைகள்.</p>
+                </div>
+                <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 max-w-xl shadow-md">
+                    <h4 class="text-md font-semibold text-white mb-4">டெக் ஆலோசனைக்கு பதிவு செய்ய:</h4>
+                    <form id="techForm" class="space-y-4">
+                        <div>
+                            <label class="block text-xs text-slate-400 mb-1">பெயர் / பிசினஸ் பெயர் *</label>
+                            <input type="text" id="techName" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-white text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-slate-400 mb-1">கைபேசி எண் *</label>
+                            <input type="tel" id="techPhone" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-white text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-slate-400 mb-1">தேவையான டெக் உதவி *</label>
+                            <textarea id="techDetails" rows="3" required class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-white text-sm"></textarea>
+                        </div>
+                        <button type="submit" class="bg-emerald-600 hover:bg-emerald-500 text-white px-6 py-2.5 rounded-xl text-sm font-semibold transition">விண்ணப்பத்தை சமர்ப்பிக்க</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. TRACK STATUS TAB -->
+        <div id="tab-track" class="hidden space-y-6">
+            <div class="bg-slate-800 p-6 md:p-8 rounded-2xl border border-slate-700 max-w-xl mx-auto space-y-6 shadow-xl">
+                <div class="text-center">
+                    <h3 class="text-2xl font-bold text-emerald-400 mb-2">🔍 விண்ணப்ப நிலை அறிய (Track Status)</h3>
+                    <p class="text-slate-300 text-sm">உங்கள் விண்ணப்ப எண்ணை (Request ID) உள்ளிட்டு நிலவரத்தைத் தெரிந்துகொள்ளுங்கள்.</p>
+                </div>
+                <div class="flex gap-3">
+                    <input type="text" id="trackInput" placeholder="எ.கா: REQ1001" class="flex-grow bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-white text-sm">
+                    <button id="trackBtn" class="bg-emerald-600 hover:bg-emerald-500 text-white px-6 py-2.5 rounded-xl text-sm font-semibold transition">தேடு</button>
+                </div>
+                <div id="trackResult" class="bg-slate-900 p-5 rounded-xl border border-slate-800 text-sm text-slate-300 hidden"></div>
+            </div>
+        </div>
+
+        <!-- 7. ADMIN DASHBOARD TAB (Secured with Logout) -->
+        <div id="tab-admin" class="hidden space-y-6">
+            <div class="bg-slate-800 p-6 md:p-8 rounded-2xl border border-slate-700 space-y-6 shadow-xl">
+                <div class="flex flex-wrap justify-between items-center gap-4">
+                    <div>
+                        <h3 class="text-2xl font-bold text-amber-400">🔒 நிர்வாகி மேலாண்மை (Admin Dashboard)</h3>
+                        <p class="text-slate-300 text-sm">பெறப்பட்ட விண்ணப்பங்கள் மற்றும் வருவாய் விவரங்கள் (MongoDB Linked).</p>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-3">
+                        <div class="bg-amber-500/20 text-amber-300 px-4 py-2 rounded-xl text-sm font-semibold">
+                            Total Requests: <span id="totalCount">0</span>
+                        </div>
+                        <div class="bg-emerald-500/20 text-emerald-300 px-4 py-2 rounded-xl text-sm font-semibold">
+                            Total Revenue: <span id="totalRevenue">₹0</span>
+                        </div>
+                        <button onclick="switchTab('home')" class="bg-rose-600 hover:bg-rose-500 text-white px-4 py-2 rounded-xl text-sm font-semibold transition shadow">
+                            🚪 Logout
+                        </button>
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-sm">
+                        <thead>
+                            <tr class="bg-slate-900 text-slate-400 border-b border-slate-700">
+                                <th class="p-3.5">ID</th>
+                                <th class="p-3.5">தேதி</th>
+                                <th class="p-3.5">பெயர்</th>
+                                <th class="p-3.5">போன்</th>
+                                <th class="p-3.5">சேவை</th>
+                                <th class="p-3.5">நிலை</th>
+                                <th class="p-3.5">தகவல்</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminTableBody" class="divide-y divide-slate-700/50"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- SUCCESS SCREEN VIEW -->
+        <div id="tab-success" class="hidden space-y-6 max-w-xl mx-auto text-center py-8">
+            <div class="bg-slate-800 p-8 md:p-10 rounded-2xl border border-emerald-500/50 space-y-4 shadow-xl">
+                <div class="w-16 h-16 bg-emerald-500/20 text-emerald-400 text-3xl flex items-center justify-center rounded-full mx-auto">✓</div>
+                <h3 class="text-2xl font-bold text-white">விண்ணப்பம் வெற்றிகரமாக பதிவு செய்யப்பட்டது!</h3>
+                <div class="bg-slate-900 p-5 rounded-xl border border-slate-700 text-left space-y-2 text-sm">
+                    <p><strong class="text-emerald-400">Request ID:</strong> <span id="succId" class="font-mono text-white"></span></p>
+                    <p><strong>பெயர்:</strong> <span id="succName" class="text-white"></span></p>
+                    <p><strong>கைபேசி எண்:</strong> <span id="succPhone" class="text-white"></span></p>
+                    <p><strong>சேவை:</strong> <span id="succService" class="text-white"></span></p>
+                    <p><strong>முகவரி:</strong> <span id="succAddress" class="text-white"></span></p>
+                </div>
+                <div class="flex justify-center gap-4 pt-4">
+                    <button onclick="switchTab('paid')" class="bg-slate-700 hover:bg-slate-600 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition">சேவை பட்டியலுக்கு</button>
+                    <button onclick="switchTab('track')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition">நிலையை அறிய</button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- SERVICE POPUP MODAL -->
+    <div id="serviceModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-800 border border-slate-700 rounded-2xl max-w-lg w-full p-6 md:p-8 space-y-6 shadow-2xl relative">
+            <div class="flex justify-between items-center border-b border-slate-700 pb-3">
+                <h3 id="modalServiceTitle" class="text-xl font-bold text-emerald-400">Service Application</h3>
+                <button id="closeModalBtn" class="text-slate-400 hover:text-white text-xl font-bold">&times;</button>
+            </div>
+            <form id="modalForm" class="space-y-4">
+                <input type="hidden" id="modalServiceCode">
+                <input type="hidden" id="modalServiceName">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs text-slate-400 mb-1">பெயர் (Name) *</label>
+                        <input type="text" id="mName" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-white text-sm" placeholder="உங்கள் பெயர்">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-slate-400 mb-1">கைபேசி எண் (Mobile) *</label>
+                        <input type="tel" id="mPhone" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-white text-sm" placeholder="9876543210">
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs text-slate-400 mb-1">மாவட்டம் (District) *</label>
+                        <input type="text" id="mDistrict" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-white text-sm" value="செங்கல்பட்டு">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-slate-400 mb-1">Pin Code *</label>
+                        <input type="text" id="mPincode" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-white text-sm" placeholder="603305">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs text-slate-400 mb-1">முழு முகவரி (Full Address) *</label>
+                    <textarea id="mAddress" rows="2" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-white text-sm" placeholder="வீட்டு எண், தெரு, ஊர் பெயர்"></textarea>
+                </div>
+                <div class="flex justify-end gap-3 pt-2">
+                    <button type="button" id="cancelModalBtn" class="bg-slate-700 hover:bg-slate-600 text-white px-5 py-2.5 rounded-xl text-sm transition">ரத்து செய்</button>
+                    <button type="submit" class="bg-emerald-600 hover:bg-emerald-500 text-white px-6 py-2.5 rounded-xl text-sm font-semibold transition">உறுதி செய்து சமர்ப்பிக்க</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- DEPARTMENT SCHEMES MODAL -->
+    <div id="deptModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-800 border border-slate-700 rounded-2xl max-w-2xl w-full p-6 md:p-8 space-y-6 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center border-b border-slate-700 pb-3">
+                <h3 id="deptModalTitle" class="text-xl font-bold text-emerald-400">Department Schemes</h3>
+                <button id="closeDeptModalBtn" class="text-slate-400 hover:text-white text-xl font-bold">&times;</button>
+            </div>
+            <div id="deptModalContent" class="space-y-4 text-slate-300 text-sm"></div>
+            <div class="flex justify-end pt-2">
+                <button id="closeDeptModalBtn2" class="bg-slate-700 hover:bg-slate-600 text-white px-5 py-2.5 rounded-xl text-sm transition">மூடு (Close)</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-slate-950 border-t border-slate-800 py-4 mt-auto text-center text-xs text-slate-500">
+        <p>&copy; 2026 டிஜிட்டல் E-சேவை & டெக் ஆலோசனை மையம். அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.</p>
+    </footer>
+
+    <script>
+        const paidServicesList = [
+            { code: "REV-101", name: "சாதிச் சான்றிதழ் (Community Certificate)", fee: "₹60" },
+            { code: "REV-102", name: "இருப்பிடச் சான்றிதழ் (Nativity Certificate)", fee: "₹60" },
+            { code: "REV-103", name: "வருமானச் சான்றிதழ் (Income Certificate)", fee: "₹60" },
+            { code: "REV-104", name: "முதல் பட்டதாரிச் சான்றிதழ் (First Graduate)", fee: "₹60" },
+            { code: "REV-105", name: "கைவிடப்பட்ட பெண் சான்றிதழ்", fee: "₹60" },
+            { code: "REV-106", name: "விவசாய வருமானச் சான்றிதழ்", fee: "₹60" },
+            { code: "REV-107", name: "குடும்ப இடப்பெயர்வு சான்றிதழ்", fee: "₹60" },
+            { code: "REV-108", name: "வேலைவாய்ப்பின்மைச் சான்றிதழ்", fee: "₹60" },
+            { code: "REV-109", name: "விதவைச் சான்றிதழ்", fee: "₹60" },
+            { code: "REV-113", name: "சாதி மறுப்புத் திருமணச் சான்றிதழ்", fee: "₹60" },
+            { code: "REV-114", name: "சட்ட வாரிசுச் சான்றிதழ் (Legal Heir)", fee: "₹60" },
+            { code: "REV-115", name: "OBC சான்றிதழ்", fee: "₹60" },
+            { code: "REV-116", name: "இருப்பிடச் சான்றிதழ் (Residence)", fee: "₹60" },
+            { code: "REV-117", name: "சிறு / குறு விவசாயி சான்றிதழ்", fee: "₹60" },
+            { code: "REV-118", name: "கடன்தீர்க்கும் திறன் சான்றிதழ் (Solvency)", fee: "₹60" },
+            { code: "REV-119", name: "ஆண் வாரிசு இல்லைச் சான்றிதழ்", fee: "₹60" },
+            { code: "REV-120", name: "திருமணமாகாதவர் சான்றிதழ்", fee: "₹60" },
+            { code: "LND-201", name: "பட்டா பெயர் மாற்றம் (Online Patta Transfer)", fee: "₹60" },
+            { code: "RAT-201", name: "புதிய குடும்ப அட்டை (New Ration Card)", fee: "₹60" },
+            { code: "RAT-202", name: "குடும்ப அட்டை திருத்தம் (Correction)", fee: "₹60" },
+            { code: "RAT-203", name: "ஸ்மார்ட் கார்டு பிரிண்ட் (Smart Card Print)", fee: "₹30" },
+            { code: "UTL-201", name: "மின் கட்டணம் செலுத்துதல் (EB Bill Payment)", fee: "₹15–₹60" },
+            { code: "WEL-201", name: "சமூக நலத் திட்ட விண்ணப்பங்கள்", fee: "₹120" },
+            { code: "POL-201", name: "காவல் நிலைய CSR நிலை பார்க்க", fee: "₹10" },
+            { code: "POL-202", name: "FIR நிலை பார்க்க", fee: "₹10" },
+            { code: "POL-203", name: "ஆன்லைன் காவல் புகார் பதிவு", fee: "₹20" },
+            { code: "RTO-201", name: "ஓட்டுநர் உரிமம் தொடர்பான சேவைகள்", fee: "₹20–₹60" }
+        ];
+
+        const freeServicesList = [
+            { code: "FREE-301", name: "CMHIS Beneficiary Card (மருத்துவ காப்பீட்டு அட்டை)", fee: "₹0" },
+            { code: "FREE-302", name: "பிறப்புச் சான்றிதழ் பதிவிறக்கம் (Birth Certificate Copy)", fee: "₹0" },
+            { code: "FREE-303", name: "இறப்புச் சான்றிதழ் பதிவிறக்கம் (Death Certificate Copy)", fee: "₹0" },
+            { code: "FREE-304", name: "பட்டா நகல் பதிவிறக்கம் (Patta Copy Download)", fee: "₹0" },
+            { code: "FREE-305", name: "FMB நகல் பதிவிறக்கம் (FMB Sketch Copy)", fee: "₹0" },
+            { code: "FREE-306", name: "வில்லங்கச் சான்றிதழ் (Encumbrance Certificate - EC)", fee: "₹0" }
+        ];
+
+        const departmentsData = [
+            {
+                id: "rural",
+                name: "1. ஊரக வளர்ச்சி மற்றும் ஊராட்சித் துறை",
+                icon: "🏡",
+                schemes: [
+                    {
+                        title: "கலைஞரின் கனவு இல்லம் & PMAY-G",
+                        benefit: "கிராமப்புறத்தில் வீடு இல்லாத தகுதியுள்ள குடும்பங்களுக்கு வீடு கட்டுவதற்கான நிதியுதவி.",
+                        eligibility: "அரசு கணக்கெடுப்புப் பட்டியலில் இடம்பெறும் தகுதியுள்ள கிராமப்புறக் குடும்பங்கள்.",
+                        documents: "ஆதார், குடும்ப அட்டை, வீட்டுமனை பட்டா, வங்கி கணக்கு விவரங்கள்.",
+                        apply: "ஊராட்சி அலுவலகம் அல்லது ஊராட்சி ஒன்றிய அலுவலகம்."
+                    },
+                    {
+                        title: "மகாத்மா காந்தி தேசிய ஊரக வேலை உறுதித் திட்டம் (MGNREGS)",
+                        benefit: "வயது வந்த உறுப்பினர்கள் திறன்சாரா உடல் உழைப்பு வேலை கோருவதன் மூலம் கூலி வேலை பெறலாம்.",
+                        eligibility: "கிராமப்புறத்தில் வசிக்கும் குடும்பத்தின் 18 வயது நிறைவடைந்த உறுப்பினர்கள்.",
+                        documents: "குடும்ப உறுப்பினர்களின் விவரங்கள், ஆதார் அட்டை, புகைப்படம், குடும்ப அட்டை.",
+                        apply: "கிராம ஊராட்சி அலுவலகத்தில் வேலை அட்டைக்காக விண்ணப்பிக்கலாம்."
+                    }
+                ]
+            },
+            {
+                id: "social",
+                name: "2. சமூக நலம் மற்றும் மகளிர் உரிமைத் துறை",
+                icon: "👩",
+                schemes: [
+                    {
+                        title: "கலைஞர் மகளிர் உரிமைத் திட்டம்",
+                        benefit: "தகுதியான குடும்பத் தலைவிகளுக்கு மாதம் ₹1,000 நிதியுதவி வழங்கப்படுகிறது.",
+                        eligibility: "தமிழ்நாட்டில் வசிக்கும் குடும்பத் தலைவிகள்.",
+                        documents: "ஆதார் அட்டை, குடும்ப அட்டை, வங்கி கணக்கு விவரங்கள், கைப்பேசி எண்.",
+                        apply: "அரசு அறிவிக்கும் விண்ணப்ப முகாம்கள் அல்லது இ-சேவை மையம்."
+                    },
+                    {
+                        title: "மூத்த குடிமக்கள் ஓய்வூதியத் திட்டம் (OAP)",
+                        benefit: "முதியோர்களுக்கு மாதாந்திர ஓய்வூதியம் வழங்கப்படுகிறது.",
+                        eligibility: "60 வயது நிரம்பிய ஆதரவற்ற முதியவர்கள்.",
+                        documents: "ஆதார் அட்டை, வயது சான்று, வருமானச் சான்றிதழ், வங்கி கணக்கு பாஸ்புக்.",
+                        apply: "வட்ட அலுவலகம் (Taluk Office) அல்லது இ-சேவை மையம்."
+                    }
+                ]
+            },
+            {
+                id: "revenue",
+                name: "3. வருவாய் மற்றும் பேரிடர் மேலாண்மைத் துறை",
+                icon: "🏛️",
+                schemes: [
+                    {
+                        title: "முதலமைச்சரின் பொது நிவாரண நிதி",
+                        benefit: "பேரிடர்கள், விபத்துகள் மற்றும் ஆபத்தான மருத்துவச் சிகிச்சைகளுக்கு நிதி உதவி.",
+                        eligibility: "பாதிக்கப்பட்ட தகுதியுள்ள பொதுமக்கள்.",
+                        documents: "மருத்துவச் சான்றிதழ் / விபத்து அறிக்கை, ஆதார் அட்டை, வங்கி கணக்கு விவரங்கள்.",
+                        apply: "மாவட்ட ஆட்சியர் அலுவலகம் அல்லது இ-சேவை மையம்."
+                    }
+                ]
+            },
+            {
+                id: "agri",
+                name: "4. வேளாண்மை மற்றும் உழவர் நலத்துறை",
+                icon: "🌾",
+                schemes: [
+                    {
+                        title: "PM-KISAN (பிரதம மந்திரி கிசான் சம்மான் நிதி)",
+                        benefit: "விவசாயிகளுக்கு ஆண்டுதோறும் ₹6,000 மூன்று தவணையாக வங்கி கணக்கில் செலுத்தப்படுகிறது.",
+                        eligibility: "செல்லுபடியாகும் நில உரிமை உள்ள அனைத்து விவசாயக் குடும்பங்களும்.",
+                        documents: "ஆதார் அட்டை, நில உரிமைப் பட்டா (Patta/Chitta), வங்கி கணக்கு பாஸ்புக்.",
+                        apply: "பொது இ-சேவை மையம் அல்லது வேளாண்மை உதவி இயக்குநர் அலுவலகம்."
+                    }
+                ]
+            },
+            {
+                id: "ration",
+                name: "5. உணவு மற்றும் நுகர்வோர் பாதுகாப்புத் துறை",
+                icon: "🛒",
+                schemes: [
+                    {
+                        title: "பொது விநியோகத் திட்டம் (Ration Card Services)",
+                        benefit: "மானிய விலையில் உணவுப் பொருட்கள் மற்றும் அத்தியாவசியப் பொருட்கள் வழங்குதல்.",
+                        eligibility: "தமிழ்நாட்டில் வசிக்கும் அனைத்துக் குடிமக்களும்.",
+                        documents: "முகவரிச் சான்று, குடும்ப உறுப்பினர்களின் ஆதார் அட்டைகள், புகைப்படம்.",
+                        apply: "tnpds.gov.in இணையதளம் அல்லது இ-சேவை மையம்."
+                    }
+                ]
+            }
+        ];
+
+        function renderPaidServices() {
+            const grid = document.getElementById('paidServicesGrid');
+            if (!grid) return;
+            grid.innerHTML = '';
+            paidServicesList.forEach(s => {
+                grid.innerHTML += `
+                    <div class="bg-slate-900 p-5 rounded-xl border border-slate-800 flex flex-col justify-between space-y-4 shadow">
+                        <div>
+                            <div class="flex justify-between items-start">
+                                <span class="text-xs bg-emerald-500/20 text-emerald-300 px-2.5 py-1 rounded-full font-mono">${s.code}</span>
+                                <span class="text-emerald-400 font-bold text-sm">${s.fee}</span>
+                            </div>
+                            <h4 class="font-bold text-white mt-3 text-base">${s.name}</h4>
+                        </div>
+                        <button onclick="openModal('${s.code}', '${s.name}', '${s.fee}')" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-2.5 rounded-xl text-sm font-semibold transition">விண்ணப்பிக்க</button>
+                    </div>
+                `;
+            });
+        }
+
+        function renderFreeServices() {
+            const grid = document.getElementById('freeServicesGrid');
+            if (!grid) return;
+            grid.innerHTML = '';
+            freeServicesList.forEach(s => {
+                grid.innerHTML += `
+                    <div class="bg-slate-900 p-5 rounded-xl border border-slate-800 flex flex-col justify-between space-y-4 shadow">
+                        <div>
+                            <div class="flex justify-between items-start">
+                                <span class="text-xs bg-cyan-500/20 text-cyan-300 px-2.5 py-1 rounded-full font-mono">${s.code}</span>
+                                <span class="text-cyan-400 font-bold text-sm">${s.fee}</span>
+                            </div>
+                            <h4 class="font-bold text-white mt-3 text-base">${s.name}</h4>
+                        </div>
+                        <button onclick="openModal('${s.code}', '${s.name}', '${s.fee}')" class="w-full bg-cyan-600 hover:bg-cyan-500 text-white py-2.5 rounded-xl text-sm font-semibold transition">விண்ணப்பிக்க</button>
+                    </div>
+                `;
+            });
+        }
+
+        function renderDepartments() {
+            const grid = document.getElementById('departmentGrid');
+            if (!grid) return;
+            grid.innerHTML = '';
+            departmentsData.forEach(d => {
+                grid.innerHTML += `
+                    <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 flex flex-col justify-between space-y-4 hover:border-emerald-500/50 transition cursor-pointer shadow" onclick="openDeptModal('${d.id}')">
+                        <div class="space-y-2">
+                            <div class="text-3xl">${d.icon}</div>
+                            <h4 class="font-bold text-white text-lg">${d.name}</h4>
+                            <p class="text-xs text-slate-400">${d.schemes.length} திட்டங்கள் உள்ளன</p>
+                        </div>
+                        <button class="w-full bg-slate-800 hover:bg-emerald-600 text-slate-200 hover:text-white py-2.5 rounded-xl text-xs font-semibold transition">
+                            விவரங்களைக் காண & அறிய ➔
+                        </button>
+                    </div>
+                `;
+            });
+        }
+
+        function openDeptModal(deptId) {
+            const dept = departmentsData.find(d => d.id === deptId);
+            if (!dept) return;
+
+            document.getElementById('deptModalTitle').innerText = dept.name;
+            const contentDiv = document.getElementById('deptModalContent');
+            contentDiv.innerHTML = '';
+
+            dept.schemes.forEach((sch, idx) => {
+                contentDiv.innerHTML += `
+                    <div class="bg-slate-900 p-5 rounded-xl border border-slate-800 space-y-2 ${idx > 0 ? 'mt-4' : ''}">
+                        <h5 class="font-bold text-emerald-400 text-base">${sch.title}</h5>
+                        <p class="text-xs text-slate-200"><strong>மக்களுக்கு பயன்:</strong> ${sch.benefit}</p>
+                        <p class="text-xs text-slate-300"><strong>தகுதியானவர்கள்:</strong> ${sch.eligibility}</p>
+                        <p class="text-xs text-slate-300"><strong>தேவையான ஆவணங்கள்:</strong> ${sch.documents}</p>
+                        <p class="text-xs text-amber-300"><strong>எங்கே விண்ணப்பிக்கலாம்:</strong> ${sch.apply}</p>
+                    </div>
+                `;
+            });
+
+            document.getElementById('deptModal').classList.remove('hidden');
+        }
+
+        function closeDeptModal() {
+            document.getElementById('deptModal').classList.add('hidden');
+        }
+
+        function openModal(code, name, fee) {
+            document.getElementById('modalServiceCode').value = code;
+            document.getElementById('modalServiceName').value = `${code}: ${name} (${fee})`;
+            document.getElementById('modalServiceTitle').innerText = `Apply: ${code} - ${name}`;
+            document.getElementById('serviceModal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('serviceModal').classList.add('hidden');
+            document.getElementById('modalForm').reset();
+        }
+
+        // --- SECURED TAB SWITCHING WITH ADMIN PASSWORD CHECK ---
+        function switchTab(tabId) {
+            if (tabId === 'admin') {
+                const password = prompt("நிர்வாகி (Admin) பாஸ்வேர்டை உள்ளிடவும்:");
+                if (!password) return;
+
+                fetch('http://localhost:5000/api/admin-login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ password: password })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        proceedToTab(tabId);
+                    } else {
+                        alert(data.error || 'தவறான பாஸ்வேர்ட்!');
+                    }
+                })
+                .catch(err => {
+                    console.error('Login Error:', err);
+                    alert('சர்வர் இணைப்பு தோல்வியுற்றது.');
+                });
+                return;
+            }
+
+            proceedToTab(tabId);
+        }
+
+        function proceedToTab(tabId) {
+            const tabs = ['home', 'paid', 'free', 'schemes', 'tech', 'track', 'admin', 'success'];
+            tabs.forEach(t => {
+                const el = document.getElementById('tab-' + t);
+                if(el) el.classList.add('hidden');
+                const btn = document.getElementById('btn-' + t);
+                if(btn) {
+                    btn.className = "px-2.5 py-1.5 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 transition";
+                }
+            });
+
+            const targetTab = document.getElementById('tab-' + tabId);
+            if(targetTab) targetTab.classList.remove('hidden');
+
+            const activeBtn = document.getElementById('btn-' + tabId);
+            if(activeBtn) {
+                activeBtn.className = tabId === 'admin' ? "px-2.5 py-1.5 rounded-lg text-xs font-medium bg-amber-600 text-white shadow transition flex items-center gap-1" : "px-2.5 py-1.5 rounded-lg text-xs font-medium bg-emerald-600 text-white shadow transition";
+            }
+
+            if(tabId === 'admin') renderAdminTable();
+        }
+
+        async function renderAdminTable() {
+            try {
+                const response = await fetch('http://localhost:5000/api/requests');
+                const requests = await response.json();
+
+                const tbody = document.getElementById('adminTableBody');
+                if(!tbody) return;
+                
+                document.getElementById('totalCount').innerText = requests.length;
+                document.getElementById('totalRevenue').innerText = "₹" + requests.reduce((sum, r) => sum + (r.feeNum || 0), 0);
+                
+                tbody.innerHTML = '';
+                requests.forEach((r) => {
+                    tbody.innerHTML += `
+                        <tr class="border-b border-slate-700/50">
+                            <td class="p-3.5 font-mono text-amber-400">${r.requestId}</td>
+                            <td class="p-3.5">${r.date}</td>
+                            <td class="p-3.5">${r.name}</td>
+                            <td class="p-3.5">${r.phone}</td>
+                            <td class="p-3.5">${r.service}</td>
+                            <td class="p-3.5"><span class="px-2.5 py-1 rounded-full text-xs ${r.status === 'Completed' ? 'bg-emerald-500/20 text-emerald-300' : 'bg-amber-500/20 text-amber-300'}">${r.status}</span></td>
+                            <td class="p-3.5 text-xs text-emerald-400">Database Linked</td>
+                        </tr>`;
+                });
+            } catch (err) {
+                console.error('Failed to load admin requests:', err);
+            }
+        }
+
+        async function trackStatus() {
+            const q = document.getElementById('trackInput').value.trim();
+            const resDiv = document.getElementById('trackResult');
+            if(!resDiv) return;
+            resDiv.classList.remove('hidden');
+
+            if(!q) {
+                resDiv.innerHTML = `<p class="text-rose-400">தயவுசெய்து Request ID-ஐ உள்ளிடவும்.</p>`;
+                return;
+            }
+
+            try {
+                const response = await fetch(`http://localhost:5000/api/requests/${q}`);
+                const data = await response.json();
+
+                if(data.success && data.request) {
+                    const found = data.request;
+                    resDiv.innerHTML = `
+                        <p><strong class="text-emerald-400">Request ID:</strong> ${found.requestId}</p>
+                        <p><strong>பெயர்:</strong> ${found.name}</p>
+                        <p><strong>சேவை:</strong> ${found.service}</p>
+                        <p><strong>நிலை:</strong> <span class="px-2.5 py-0.5 rounded-full text-xs ${found.status === 'Completed' ? 'bg-emerald-500/20 text-emerald-300' : 'bg-amber-500/20 text-amber-300'}">${found.status}</span></p>
+                    `;
+                } else {
+                    resDiv.innerHTML = `<p class="text-rose-400">இந்த ID-க்கான விண்ணப்பம் எதுவும் கிடைக்கவில்லை.</p>`;
+                }
+            } catch (err) {
+                console.error('Tracking Error:', err);
+                resDiv.innerHTML = `<p class="text-rose-400">சர்வர் இணைப்பு தோல்வியுற்றது.</p>`;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            renderPaidServices();
+            renderFreeServices();
+            renderDepartments();
+            switchTab('home');
+
+            const closeModalBtn = document.getElementById('closeModalBtn');
+            if(closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
+            const cancelModalBtn = document.getElementById('cancelModalBtn');
+            if(cancelModalBtn) cancelModalBtn.addEventListener('click', closeModal);
+            const closeDeptModalBtn = document.getElementById('closeDeptModalBtn');
+            if(closeDeptModalBtn) closeDeptModalBtn.addEventListener('click', closeDeptModal);
+            const closeDeptModalBtn2 = document.getElementById('closeDeptModalBtn2');
+            if(closeDeptModalBtn2) closeDeptModalBtn2.addEventListener('click', closeDeptModal);
+            const trackBtn = document.getElementById('trackBtn');
+            if(trackBtn) trackBtn.addEventListener('click', trackStatus);
+
+            // Modal Form Submit
+            const modalForm = document.getElementById('modalForm');
+            if(modalForm) {
+                modalForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    const code = document.getElementById('modalServiceCode').value;
+                    const serviceName = document.getElementById('modalServiceName').value;
+                    const name = document.getElementById('mName').value;
+                    const phone = document.getElementById('mPhone').value;
+                    const address = document.getElementById('mAddress').value + ", " + document.getElementById('mDistrict').value;
+                    
+                    let feeVal = 60;
+                    if (code.startsWith('FREE')) feeVal = 0;
+                    else if (code === 'RAT-203') feeVal = 30;
+
+                    const formData = { name, phone, service: serviceName, address, feeNum: feeVal };
+
+                    try {
+                        const response = await fetch('http://localhost:5000/api/requests', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(formData)
+                        });
+                        const result = await response.json();
+
+                        if(result.success) {
+                            closeModal();
+                            document.getElementById('succId').innerText = result.requestId;
+                            document.getElementById('succName').innerText = name;
+                            document.getElementById('succPhone').innerText = phone;
+                            document.getElementById('succService').innerText = serviceName;
+                            document.getElementById('succAddress').innerText = address;
+                            switchTab('success');
+                        } else {
+                            alert('பதிவு செய்வதில் பிழை: ' + result.error);
+                        }
+                    } catch (err) {
+                        console.error('API Error:', err);
+                        alert('சர்வர் இணைப்பு கிடைக்கவில்லை.');
+                    }
+                });
+            }
+
+            // Land Form Submit
+            const landForm = document.getElementById('landForm');
+            if(landForm) {
+                landForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    const name = document.getElementById('landName').value;
+                    const phone = document.getElementById('landPhone').value;
+                    const details = document.getElementById('landDetails').value;
+
+                    const formData = { name, phone, service: "Land & Scheme Consultation", address: details, feeNum: 100 };
+
+                    try {
+                        const response = await fetch('http://localhost:5000/api/requests', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(formData)
+                        });
+                        const result = await response.json();
+
+                        if(result.success) {
+                            document.getElementById('succId').innerText = result.requestId;
+                            document.getElementById('succName').innerText = name;
+                            document.getElementById('succPhone').innerText = phone;
+                            document.getElementById('succService').innerText = "Land & Scheme Consultation";
+                            document.getElementById('succAddress').innerText = details;
+                            switchTab('success');
+                        }
+                    } catch (err) {
+                        console.error('API Error:', err);
+                    }
+                });
+            }
+
+            // Tech Form Submit
+            const techForm = document.getElementById('techForm');
+            if(techForm) {
+                techForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    const name = document.getElementById('techName').value;
+                    const phone = document.getElementById('techPhone').value;
+                    const details = document.getElementById('techDetails').value;
+
+                    const formData = { name, phone, service: "Tech Solutions", address: details, feeNum: 150 };
+
+                    try {
+                        const response = await fetch('http://localhost:5000/api/requests', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(formData)
+                        });
+                        const result = await response.json();
+
+                        if(result.success) {
+                            document.getElementById('succId').innerText = result.requestId;
+                            document.getElementById('succName').innerText = name;
+                            document.getElementById('succPhone').innerText = phone;
+                            document.getElementById('succService').innerText = "Tech Solutions";
+                            document.getElementById('succAddress').innerText = details;
+                            switchTab('success');
+                        }
+                    } catch (err) {
+                        console.error('API Error:', err);
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
